@@ -97,6 +97,18 @@ def parse(b):
             continue
 
         elif length in ['FE', 'FF']:
+            byte2 = hexio.read(2)
+            bom_check = '%s%s' % (length, byte2)
+            bom_check = bom_check.upper()
+            #print bom_check
+            if bom_check in ['FEFF', 'FFFE']:
+                chars.append('EF'.lower())
+                chars.append('BB'.lower())
+                chars.append('BF'.lower())
+                #and make sure the other stream stays in step with it
+                binio.read(16)
+                continue
+            #otherwise
             raise ValueError('Bytes do not represent valid UTF-8 data')
 
     return chars
