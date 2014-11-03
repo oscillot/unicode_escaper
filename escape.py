@@ -166,5 +166,5 @@ def selective_escape(chars):
 
 
 def escape(s):
-    print to_hex_string_list(unicode(s))
+    #print to_hex_string_list(unicode(s))
     return selective_escape(to_hex_string_list(s))
