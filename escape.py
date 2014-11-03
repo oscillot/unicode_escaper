@@ -119,6 +119,14 @@ def to_hex_string_list(text):
     :param string text: the text to convert
     :rtype: a list of strings"""
 
+    return [str(hex(ord(c)))[2:] for c in text.encode('utf-8')]
+
+def to_hex_string(text):
+    """Convert a unicode-decoded string into a list of hex encoded characters.
+
+    :param string text: the text to convert
+    :rtype: a list of strings"""
+
     return ''.join([str(hex(ord(c)))[2:] for c in text.encode('utf-8')])
 
 def selective_escape(chars):
@@ -155,3 +163,8 @@ def selective_escape(chars):
         else:
             ascii_only.append('&#%s;' % str(int(e, 16)))
     return ''.join(ascii_only)
+
+
+def escape(s):
+    print to_hex_string_list(unicode(s))
+    return selective_escape(to_hex_string_list(s))
